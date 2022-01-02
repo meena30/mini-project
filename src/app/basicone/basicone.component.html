@@ -1,0 +1,25 @@
+<b>Interpolation:</b>
+<p>The user name is {{ username }} and employee id is {{ userID }} </p>
+<p>The employee id is : {{ getemployeeID() }} </p> <!-- call function -->
+<b>Property Binding:</b>
+<p><img [src]="itemImageUrl"></p> 
+<b>Two way Binding:</b>
+<input type="text" value={{serverStatus}} [(ngModel)]="serverStatus">
+<p>server is {{serverStatus}} </p>
+<b>Structural Directives:</b>
+<div *ngIf="isUser">
+    <div *ngFor="let user of users">
+        <div [ngSwitch]="user.gender" >
+            <div class="fbox" *ngSwitchCase="'Female'">{{user.name}}</div>
+            <div class="mbox" *ngSwitchCase="'Male'">{{user.name}}</div>
+            <div *ngSwitchDefault>{{user.name}}</div>
+        </div>
+    </div>
+</div>    
+
+<h1>Parent to child(@input), child-parent(@output):</h1>
+
+<h2>Should mankind colonize the Universe?</h2>
+<h3>Agree: {{agreed}}, Disagree: {{disagreed}}</h3>
+
+<app-basictwo *ngFor="let voter of users" [userlist]="voter.name" [hero]="heroname" (voted)="onVoted($event)"></app-basictwo>
