@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import {Role} from '../../model/role';
 
 @Component({
   selector: 'app-login',
@@ -42,10 +43,21 @@ export class LoginComponent implements OnInit {
     this.loading = true;
 
     this.authService.login(this.username.value, this.password.value).subscribe((data) => {
-       if (this.authService.isLoggedIn) {
+
+      console.log(data);
+      console.log(data.role);
+      console.log(this.authService.redirectUrl);
+
+       //if (this.authService.isLoggedIn && data.role == Role.Superadmin) {
+
+        if ( (this.authService.isLoggedIn && data.role == Role.Admin) || (this.authService.isLoggedIn && data.role == Role.Superadmin) ) {
           const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
           this.router.navigate([redirect]);
-        } else {
+        } 
+        else if(this.authService.isLoggedIn && data.role == Role.User){
+            this.router.navigate(['/']);
+        }
+        else {
           this.loginError = 'Username or password is incorrect.';
         }
       },
