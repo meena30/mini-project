@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
        //if (this.authService.isLoggedIn && data.role == Role.Superadmin) {
 
         if ( (this.authService.isLoggedIn && data.role == Role.Admin) || (this.authService.isLoggedIn && data.role == Role.Superadmin) ) {
-          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
+          //const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
+          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/employee';
           this.router.navigate([redirect]);
         } 
         else if(this.authService.isLoggedIn && data.role == Role.User){
