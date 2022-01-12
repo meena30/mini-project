@@ -1,1 +1,34 @@
-<p>employeelist works!</p>
+<h1>Insurance Policy Management</h1>
+<div>
+    <!--<span *ngIf="resMsg.message"> {{resMsg.message}} </span>
+    
+    <p *ngIf="resMsg.message" class="alert alert-success">
+        <strong>{{resMsg.message}}</strong></p>-->
+
+        <p *ngIf="resMsg" class="alert alert-success">
+            <strong>{{resMsg.message}}</strong></p>
+
+  <table border='1' width='100%' style='border-collapse: collapse;'>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+
+    </tr>
+
+    <tr *ngFor="let item of list">
+      <td>{{ item.ID }}</td>
+      <td>{{ item.FirstName }}</td>
+      <td>{{ item.LastName }}</td>
+      <td>{{ item.Email }}</td>
+      <td>
+        <!--<button class="btn btn-danger btn-sm" id="remove" (click)="deleteRow(item.ID)">Delete</button>-->
+
+        <a [routerLink]="['/employee/edit/', item.ID]">
+            <button type="button" class="btn btn-info btn-sm">Edit</button>
+          </a>
+          <a (click)="onDelete(item.ID)" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+  </table>

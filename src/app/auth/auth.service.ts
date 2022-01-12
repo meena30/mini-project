@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,33 @@ export class AuthService {
   serverUrl = 'http://localhost/web_api';
   errorData: {};
 
-  constructor(private http: HttpClient) { }
+   private currentUserSubject: BehaviorSubject<any>;
+    public currentUser: Observable<any>;
+
+  constructor(private http: HttpClient) { 
+
+      this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUser = this.currentUserSubject.asObservable();
+  }
 
   redirectUrl: string;
+
+  public get currentUserValue(){
+        return this.currentUserSubject.value;
+    }
+
 
   login(username: string, password: string) {
     return this.http.post<any>(`${this.serverUrl}/login.php`, {username: username, password: password})
     .pipe(map(user => {
         if (user && user.token) {
           localStorage.setItem('currentUser', JSON.stringify(user));
+
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+
         }
       }),
       catchError(this.handleError)
@@ -42,6 +61,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -35,6 +35,10 @@ export class DataService {
     return this.httpClient.post(this.url + 'update_user.php', data);
   }*/
 
+  updateUser(data){
+    return this.httpClient.post(this.url + 'update_user.php', data);
+  }
+
   updateUserData(data: User): Observable<ApiResponse> {
     return this.httpClient.post<ApiResponse>(this.url + 'update_user.php', data);
   }
