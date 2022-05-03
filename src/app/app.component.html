@@ -129,16 +129,39 @@
   </div>-->
 <!-- Begin page content -->
 
+<!-- <div class="col-xs-12">
+  <input
+    type="text"
+    placeholder="Choose date"
+    class="form-control" 
+    bsDatepicker 
+  />
+</div> -->
 
-<app-header></app-header>
+<!-- <app-header></app-header>
+<app-sidenav></app-sidenav>
 <router-outlet></router-outlet>
 
   <footer class="footer">
     <div class="container">
       <p class="text-muted">Place sticky footer content here.</p>
     </div>
-  </footer>
+  </footer> -->
 
+
+<!--<app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>-->
+<mat-drawer-container>
+  <!--<mat-drawer mode="side" opened="true">-->
+    <!-- <mat-drawer mode="side" opened="true"> -->
+      <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+    <!-- <app-header></app-header> -->
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
 
 
 

@@ -7,9 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { ListEditComponent } from './list-edit/list-edit.component';
 
 const routes: Routes = [
+  /*{ path: '', redirectTo:'basictwo', pathMatch:'full'},*/
   { path: 'login', component: LoginComponent },
   { path: '', component: BasiconeComponent },
-  { path: 'basictwo', component: BasictwoComponent },
+  { path:'basictwo', component: BasictwoComponent },
   { path: 'reactform', component: ReactformComponent },
   { path: 'edit/:id', component: ListEditComponent },
   { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) }

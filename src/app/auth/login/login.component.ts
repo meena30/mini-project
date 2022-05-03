@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([redirect]);
         } 
         else if(this.authService.isLoggedIn && data.role == Role.User){
-            this.router.navigate(['/']);
+            this.router.navigate(['/erp']);
         }
         else {
           this.loginError = 'Username or password is incorrect.';

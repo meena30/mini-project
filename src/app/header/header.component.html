@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-blue">
+
+
+<!--<nav class="navbar navbar-expand-md navbar-dark bg-blue">
   <div class="container">
     <a class="navbar-brand" routerLink="/" (click)="setPageTitle('Blogger')">
       <img src="assets/images/logo.png" alt="Angular Project" />
@@ -34,7 +36,51 @@
         <li class="nav-item" *ngIf="isLoggedIn">
             <a routerLink="/login" class="nav-link">Logout</a>
           </li>
+         <li class="nav-item" *ngIf="isLoggedIn">
+            <a routerLink="/login" class="nav-link">{{currentUser.first_name}}</a>
+          </li>
+           
       </ul>
     </div>
   </div>
-</nav>
+</nav>-->
+
+
+
+<mat-toolbar>
+  <mat-toolbar-row class="justify-content-between">
+    <button mat-icon-button (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="row mr-2 ml-auto" *ngIf="isLoggedIn" >
+      <ul class="row m-0 align-items-center">
+        <li>
+          <button
+            mat-button
+            [matMenuTriggerFor]="menu"
+            class="user mt-2 d-flex align-items-center"
+          >
+            <img src="./assets/user.jpg" alt="" class="user-image mr-1 p-2" />
+
+            {{currentUser.first_name}}
+            <mat-icon class="user-image-icon ml-1"
+              >keyboard_arrow_down</mat-icon
+            >
+          </button>
+          
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>exit_to_app <a routerLink="/login" class="nav-link">Logout</a> </mat-icon>
+              Logout
+            </button>
+
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="/login">
+    <mat-icon>exit_to_app</mat-icon> Logout
+  </a>
+  
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
