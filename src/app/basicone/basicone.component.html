@@ -23,3 +23,48 @@
 <h3>Agree: {{agreed}}, Disagree: {{disagreed}}</h3>
 
 <app-basictwo *ngFor="let voter of users" [userlist]="voter.name" [hero]="heroname" (voted)="onVoted($event)"></app-basictwo>
+
+<b>Pipes</b>
+{{ testData.firstName | lowercase}}, {{ testData.firstName | uppercase}}, {{ testData.DOB | date:' dd MMM yyyy'}}
+
+{{ testData.nickName.replace("_"," ") }}
+
+<code> {{ testData | json }} </code>
+<h1> Chaining Pipes</h1>
+
+{{testData.DOB | date:'MMMM' | uppercase }}
+
+<h1>Custom Pipe (replace hypen with space on string )</h1>
+{{ testData.nickName | highlight:testData.nickName }}
+
+<div *ngFor="let list of dataset">
+    <div>{{ list.nickName | highlight:list.nickName }} </div>
+</div>
+
+
+<b> Search Function </b>
+<div class="col-md-4">
+  <b>Custom Search Example</b>
+</div>
+<div class="form-group col-md-4">
+  <input type="text" class="form-control"  placeholder="Enter Keyword for filter result" [(ngModel)]="searchedKeyword">
+</div>
+
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Country</th>
+          <th>Club</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of filterResultDataSet | filter:searchedKeyword">
+          <td>{{item.firstName}}</td>
+          <td>{{item.lastName}}</td>
+          <td>{{item.country}}</td>
+          <td>{{item.club}}</td>
+      </tr>
+  </tbody>
+</table>
